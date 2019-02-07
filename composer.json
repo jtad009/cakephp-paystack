@@ -1,5 +1,5 @@
 {
-    "name": "jtad009/PayStack",
+    "name": "jtad009/cakephp-paystack",
     "description": "Paystack plugin for CakePHP",
     "type": "cakephp-plugin",
     "require": {
