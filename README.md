@@ -51,8 +51,18 @@ Step 1: Include the following code into your AppController.php to load the payst
             $this->loadComponent('PayStack.CurlConnection');
         ?>
         
-
-Step 2: in your controller create an action, mine will be PurchaseSMS()
+Step 2:create view using the following code 
+    
+    <?php
+        //Note This form will be setup as per you requirement. in my case i needed to pay for sms units
+        echo $this->Form->create(null,['url'=>['controller'=>'as-per-requirement','action'=>'purchase-sms']]);
+        echo $this->Form->input('amount',['templates'=>['inputContainer'=>'<div class="form-group">{{content}}<p class="  mb-3 mt-2"> <span  id="allocatedUnits" class="text-danger pull-right small ">0 </span><span class="small pull-right text-muted mr-2 ">UNIT(S) Worth: </span><span class="small text-muted mr-2"> Send to </span><span  id="reach" class="text-danger small ">0 </span></p></div>'],'class'=>'form-control','style'=>'resize:none','maxlength'=>"290",'options'=>['500'=>'500','1000'=>'1000','1500'=>'1500','2000'=>'2000','3000'=>'3000','5000'=>'5000','7000'=>'7000','10000'=>'10000'],'empty'=>'Select amount you want to pay','id'=>'sms-amount']);
+       echo $this->Form->submit('PURCHASE UNITS',['class'=>'btn btn-sm btn-danger btn-block mt-2   ']);
+       echo $this->Form->end();
+    
+    ?>
+    
+Step 3: in your controller create an action, mine will be PurchaseSMS()
     
     <?php
     
