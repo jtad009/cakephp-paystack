@@ -11,12 +11,12 @@
     },
     "autoload": {
         "psr-4": {
-            "CurlManager\\": "src"
+            "PayStack\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "CurlManager\\Test\\": "tests",
+            "PayStack\\Test\\": "tests",
             "Cake\\Test\\": "./vendor/cakephp/cakephp/tests"
         }
     }
