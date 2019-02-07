@@ -1,24 +1,25 @@
+# Cakephp-Paystack
 A Cakephp 3.x Plugin for making paystack payments
 Installation
 PHP 5.4+ , and Composer are required.
 
 To get the latest version of Cakephp Paystack, simply require it
 
-composer require jtad009/paystack
+composer require jtad009/cakephp-paystack
 Or add the following line to the require block of your composer.json file.
 
-"jtad009/paystack": "1.0.*"
+"jtad009/cakephp-paystack"
+
 You'll then need to run composer install or composer update to download it and have the autoloader updated.
 
-Once Laravel Paystack is installed, you need to register the service provider. Open up config/app.php and add the following to the providers key.
-
-Also, register the Plugins like this in the config/bootstrap.php:
-<?php 
-    Plugin::load('PayStack', ['bootstrap' => false, 'routes' => true,'autoload'=>true]);
-?>
+Once  Cakephp-Paystack is installed, you need to register the plugin. Open up config/bootstrap.php and add the following .
 
 
+    <?php 
 
+        Plugin::load("PayStack", ["bootstrap" => false, "routes" => true,"autoload"=>true]);
+
+    ?>
 
 ##General payment flow
 
@@ -30,25 +31,31 @@ The redirection is accomplished by submitting a form with some hidden fields. Th
 
 
 
-Usage
+##Usage
 Open your config/path.php file and add your public key, secret key, merchant email and payment url like so:
-<?php 
-    define("PaystackPublicKey",xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx);
-    define("PaystackSecretKey",xxxxxxxxxxxxxxxxxxxxxxxxxx);
 
-?>
-Simple Example on how to pay with this plugin
+    <?php 
+
+        define("PaystackPublicKey",xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx);
+        define("PaystackSecretKey",xxxxxxxxxxxxxxxxxxxxxxxxxx);
+
+    ?>
+##Simple Example on how to pay with this plugin
 --Let's say a cutomer wants to pay for sms
 
 Step 1: Include the following code into your AppController.php to load the paystack component
-        <?php 
+       
+       <?php 
+        
             $this->loadComponent('PayStack.PayStack');
             $this->loadComponent('PayStack.CurlConnection');
         ?>
         
 
 Step 2: in your controller create an action, mine will be PurchaseSMS()
+    
     <?php
+    
         public function purchaseSMS(array $data){
             $postArray = array(
                 'description'=>'SMS UNIT PURCHASE',
@@ -71,6 +78,7 @@ Step 2: in your controller create an action, mine will be PurchaseSMS()
         //Authorization url will redirect you to this function 
         //$routes->connect('/success/', ['controller' => 'StudentsProfiles', 'action' => 'complete']);
         //I had set up a route to redirect to complete action when the callback_url above is lookedup by paystack
+        
         public function complete(){
             
             $reference = isset($_GET['reference']) ? $_GET['reference'] : '';
@@ -88,7 +96,11 @@ Step 2: in your controller create an action, mine will be PurchaseSMS()
     
 
 After verification of reference code  the following response is sent and you can use this to update DB 
-object(stdClass)#224 (3) { 
+
+
+<?php 
+
+    object(stdClass)#224 (3) { 
                 ["status"]=> bool(true) 
                 ["message"]=> string(23) "Verification successful" 
                 ["data"]=> object(stdClass)#315 (24) { 
@@ -148,8 +160,10 @@ object(stdClass)#224 (3) {
                                                 ["transaction_date"]=> string(24) "2019-02-07T07:59:08.000Z" 
                                                 ["plan_object"]=> object(stdClass)#307 (0) { } 
                                                 ["subaccount"]=> object(stdClass)#310 (0) { } } }
+                                                
+             ?>
 
-----Todo
+##Todo
 Charge Returning Customers
 Add Comprehensive Tests
 Implement Transaction Dashboard to see all of the transactions in your Cakephp app
@@ -160,7 +174,7 @@ Manage Subsctiptions
 Export Transactions as csv
 
 
-----How can I thank you?
+##How can I thank you?
 Why not star the github repo? I'd love the attention! Why not share the link for this repository on Twitter or HackerNews? Spread the word!
 
 Don't forget to follow me on <a href="http://linkedin.com/in/%D0%B8%D1%81%D1%80%D0%B0%D0%B5%D0%BB-%D0%B5%D0%B4%D0%B5%D1%82-502b27174">LinkedIn</a>
