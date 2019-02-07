@@ -9,15 +9,17 @@ composer require jtad009/cakephp-paystack
 Or add the following line to the require block of your composer.json file.
 
 "jtad009/cakephp-paystack"
+
 You'll then need to run composer install or composer update to download it and have the autoloader updated.
 
 Once  Cakephp-Paystack is installed, you need to register the plugin. Open up config/bootstrap.php and add the following .
 
-<?php 
 
-    Plugin::load("PayStack", ["bootstrap" => false, "routes" => true,"autoload"=>true]);
-    
-?>
+    <?php 
+
+        Plugin::load("PayStack", ["bootstrap" => false, "routes" => true,"autoload"=>true]);
+
+    ?>
 
 ##General payment flow
 
@@ -31,17 +33,19 @@ The redirection is accomplished by submitting a form with some hidden fields. Th
 
 ##Usage
 Open your config/path.php file and add your public key, secret key, merchant email and payment url like so:
-<?php 
 
-    define("PaystackPublicKey",xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx);
-    define("PaystackSecretKey",xxxxxxxxxxxxxxxxxxxxxxxxxx);
+    <?php 
 
-?>
+        define("PaystackPublicKey",xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx);
+        define("PaystackSecretKey",xxxxxxxxxxxxxxxxxxxxxxxxxx);
+
+    ?>
 ##Simple Example on how to pay with this plugin
 --Let's say a cutomer wants to pay for sms
 
 Step 1: Include the following code into your AppController.php to load the paystack component
-        <?php 
+       
+       <?php 
         
             $this->loadComponent('PayStack.PayStack');
             $this->loadComponent('PayStack.CurlConnection');
@@ -49,6 +53,7 @@ Step 1: Include the following code into your AppController.php to load the payst
         
 
 Step 2: in your controller create an action, mine will be PurchaseSMS()
+    
     <?php
     
         public function purchaseSMS(array $data){
