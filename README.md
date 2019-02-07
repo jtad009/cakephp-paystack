@@ -11,11 +11,12 @@ Or add the following line to the require block of your composer.json file.
 "jtad009/cakephp-paystack"
 You'll then need to run composer install or composer update to download it and have the autoloader updated.
 
-Once  Cakephp-Paystack is installed, you need to register the service provider. Open up config/bootstrap.php and add the following .
+Once  Cakephp-Paystack is installed, you need to register the plugin. Open up config/bootstrap.php and add the following .
 
-Also, register the Plugins like this in the :
 <?php 
-    Plugin::load('PayStack', ['bootstrap' => false, 'routes' => true,'autoload'=>true]);
+
+    Plugin::load("PayStack", ["bootstrap" => false, "routes" => true,"autoload"=>true]);
+    
 ?>
 
 ##General payment flow
@@ -28,9 +29,10 @@ The redirection is accomplished by submitting a form with some hidden fields. Th
 
 
 
-Usage
+##Usage
 Open your config/path.php file and add your public key, secret key, merchant email and payment url like so:
 <?php 
+
     define("PaystackPublicKey",xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx);
     define("PaystackSecretKey",xxxxxxxxxxxxxxxxxxxxxxxxxx);
 
@@ -40,6 +42,7 @@ Open your config/path.php file and add your public key, secret key, merchant ema
 
 Step 1: Include the following code into your AppController.php to load the paystack component
         <?php 
+        
             $this->loadComponent('PayStack.PayStack');
             $this->loadComponent('PayStack.CurlConnection');
         ?>
@@ -47,6 +50,7 @@ Step 1: Include the following code into your AppController.php to load the payst
 
 Step 2: in your controller create an action, mine will be PurchaseSMS()
     <?php
+    
         public function purchaseSMS(array $data){
             $postArray = array(
                 'description'=>'SMS UNIT PURCHASE',
@@ -69,6 +73,7 @@ Step 2: in your controller create an action, mine will be PurchaseSMS()
         //Authorization url will redirect you to this function 
         //$routes->connect('/success/', ['controller' => 'StudentsProfiles', 'action' => 'complete']);
         //I had set up a route to redirect to complete action when the callback_url above is lookedup by paystack
+        
         public function complete(){
             
             $reference = isset($_GET['reference']) ? $_GET['reference'] : '';
@@ -86,6 +91,8 @@ Step 2: in your controller create an action, mine will be PurchaseSMS()
     
 
 After verification of reference code  the following response is sent and you can use this to update DB 
+<?php 
+
 object(stdClass)#224 (3) { 
                 ["status"]=> bool(true) 
                 ["message"]=> string(23) "Verification successful" 
@@ -146,6 +153,8 @@ object(stdClass)#224 (3) {
                                                 ["transaction_date"]=> string(24) "2019-02-07T07:59:08.000Z" 
                                                 ["plan_object"]=> object(stdClass)#307 (0) { } 
                                                 ["subaccount"]=> object(stdClass)#310 (0) { } } }
+                                                
+             ?>
 
 ##Todo
 Charge Returning Customers
