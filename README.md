@@ -5,10 +5,17 @@ PHP 5.4+ , and Composer are required.
 
 To get the latest version of Cakephp Paystack, simply require it
 
-composer require jtad009/cakephp-paystack
+    <?php
+
+        composer require jtad009/cakephp-paystack:dev-master
+    ?>
+
 Or add the following line to the require block of your composer.json file.
 
-"jtad009/cakephp-paystack"
+    <?php
+
+        "jtad009/cakephp-paystack": "dev-master"
+    ?>
 
 You'll then need to run composer install or composer update to download it and have the autoloader updated.
 
