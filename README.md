@@ -96,9 +96,11 @@ Step 2: in your controller create an action, mine will be PurchaseSMS()
     
 
 After verification of reference code  the following response is sent and you can use this to update DB 
+
+
 <?php 
 
-object(stdClass)#224 (3) { 
+    object(stdClass)#224 (3) { 
                 ["status"]=> bool(true) 
                 ["message"]=> string(23) "Verification successful" 
                 ["data"]=> object(stdClass)#315 (24) { 
