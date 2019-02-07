@@ -19,5 +19,13 @@
             "PayStack\\Test\\": "tests",
             "Cake\\Test\\": "./vendor/cakephp/cakephp/tests"
         }
-    }
+    },
+    "minimum-stability": "stable",
+    "license": "proprietary",
+    "authors": [
+      {
+        "name": "Israel Edet",
+        "email": "israeledet@skole.com.ng"
+      }
+    ]
 }
