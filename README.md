@@ -44,7 +44,8 @@ Open your config/path.php file and add your public key, secret key, merchant ema
 Step 1: Include the following code into your AppController.php to load the paystack component
        
        <?php 
-            use jtad009\Controller\Component\PayStack;
+            require_once(ROOT . DS . 'vendor' . DS . "jtad009" . DS . "cakephp-     paystack".DS."src".DS."Controller".DS."Component".DS."PayStackComponent.php");
+            require_once(ROOT . DS . 'vendor' . DS . "jtad009" . DS . "cakephp-paystack".DS."src".DS."Controller".DS."Component".DS."CurlConnectionComponent.php");
             
             $this->loadComponent('PayStack.PayStack');
             $this->loadComponent('PayStack.CurlConnection');
