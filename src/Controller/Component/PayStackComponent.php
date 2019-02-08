@@ -1,6 +1,6 @@
 <?php
 /*
- * This file is part of the Laravel Paystack package.
+ * This file is part of the Cakephp Paystack package.
  *
  * (c) israel Edet <jtad009@gmail.com>
  *
