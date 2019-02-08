@@ -94,84 +94,23 @@ Step 3: in your controller create an action, mine will be PurchaseSMS()
             if(!$reference){
             die('No reference supplied');
             }else{
-                $callbackResponse = $this->PayStack->callback($reference,$this->Auth->user('id'));
-                if(!callbackResponse && is_array($callbackResponse)):
-                    // you can then save information to the database if the ref no is valid
-                endif;
+                $transactionResponse =  $this->PayStack->callback($reference);
+                   if(!$transactionResponse->status){
+                    // there was an error from the API
+                    $this->flash->error('API returned error: ' . $tranx->message);
+                  }
+
+                  if('success' == $transactionResponse->data->status){
+                    // transaction was successful...
+                    // print out reponse and use as required
+                   debug(transactionResponse);
+
+                  }
             }
             
         }
     ?>
     
-
-After verification of reference code  the following response is sent and you can use this to update DB 
-
-
-<?php 
-
-    object(stdClass)#224 (3) { 
-                ["status"]=> bool(true) 
-                ["message"]=> string(23) "Verification successful" 
-                ["data"]=> object(stdClass)#315 (24) { 
-                ["id"]=> int(108909776) 
-                ["domain"]=> string(4) "test" 
-                ["status"]=> string(7) "success" 
-                ["reference"]=> string(32) "947d2594fe0d79a6b88a0bb3868dbf8c"
-                ["amount"]=> int(700000) 
-                ["message"]=> NULL 
-                ["gateway_response"]=> string(10) "Successful"
-                ["paid_at"]=> string(24) "2019-02-07T08:00:14.000Z"
-                ["created_at"]=> string(24) "2019-02-07T07:59:08.000Z" 
-                ["channel"]=> string(4) "card" 
-                ["currency"]=> string(3) "NGN" 
-                ["ip_address"]=> string(14) "105.112.10.202" 
-                ["metadata"]=> string(0) "" 
-                ["log"]=> object(stdClass)#328 (8) { 
-                        ["start_time"]=> int(1549526177) 
-                        ["time_spent"]=> int(41) 
-                        ["attempts"]=> int(1)
-                        ["errors"]=> int(0) 
-                        ["success"]=> bool(true) 
-                        ["mobile"]=> bool(false) 
-                        ["input"]=> array(0) { } 
-                        ["history"]=> array(2) { [0]=> object(stdClass)#322 (3) { 
-                            ["type"]=> string(6) "action" 
-                            ["message"]=> string(26) "Attempted to pay with card"
-                            ["time"]=> int(27) } [1]=> object(stdClass)#277 (3) {
-                                      ["type"]=> string(7) "success" 
-                                      ["message"]=> string(27) "Successfully paid with card"
-                                      ["time"]=> int(41) } } } ["fees"]=> int(20500)
-                                      ["fees_split"]=> NULL 
-                                      ["authorization"]=> object(stdClass)#319 (12) { 
-                                            ["authorization_code"]=> string(15) "AUTH_dffoja54zz"
-                                            ["bin"]=> string(6) "408408" 
-                                            ["last4"]=> string(4) "4081" 
-                                            ["exp_month"]=> string(2) "12" 
-                                            ["exp_year"]=> string(4) "2020" 
-                                            ["channel"]=> string(4) "card"
-                                            ["card_type"]=> string(10) "visa DEBIT" 
-                                            ["bank"]=> string(9) "Test Bank" 
-                                            ["country_code"]=> string(2) "NG"
-                                            ["brand"]=> string(4) "visa" 
-                                            ["reusable"]=> bool(true) 
-                                            ["signature"]=> string(24) "SIG_3GW2W7IImwHivl3ErQcX" } 
-                                            ["customer"]=> object(stdClass)#256 (8) {
-                                                ["id"]=> int(1792984) 
-                                                ["first_name"]=> string(0) "" 
-                                                ["last_name"]=> string(0) "" 
-                                                ["email"]=> string(23) "israel4real@hotmail.com" 
-                                                ["customer_code"]=> string(19) "CUS_z8fhmn1y8ke9tmi"
-                                                ["phone"]=> NULL ["metadata"]=> object(stdClass)#320 (0) { } 
-                                                ["risk_action"]=> string(7) "default" } 
-                                                ["plan"]=> NULL 
-                                                ["paidAt"]=> string(24) "2019-02-07T08:00:14.000Z" 
-                                                ["createdAt"]=> string(24) "2019-02-07T07:59:08.000Z" 
-                                                ["transaction_date"]=> string(24) "2019-02-07T07:59:08.000Z" 
-                                                ["plan_object"]=> object(stdClass)#307 (0) { } 
-                                                ["subaccount"]=> object(stdClass)#310 (0) { } } }
-                                                
-             ?>
-
 ##Todo
 Charge Returning Customers
 Add Comprehensive Tests
@@ -186,7 +125,7 @@ Export Transactions as csv
 ##How can I thank you?
 Why not star the github repo? I'd love the attention! Why not share the link for this repository on Twitter or HackerNews? Spread the word!
 
-Don't forget to follow me on <a href="http://linkedin.com/in/%D0%B8%D1%81%D1%80%D0%B0%D0%B5%D0%BB-%D0%B5%D0%B4%D0%B5%D1%82-502b27174">LinkedIn</a>
+Don't forget to follow me on <a href="http://linkedin.com/in/israel-edet">LinkedIn</a>
 
 Thanks! Israel Edet.
 
