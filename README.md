@@ -19,15 +19,6 @@ Or add the following line to the require block of your composer.json file.
 
 You'll then need to run composer install or composer update to download it and have the autoloader updated.
 
-Once  Cakephp-Paystack is installed, you need to register the plugin. Open up config/bootstrap.php and add the following .
-
-
-    <?php 
-
-        Plugin::load("PayStack", ["bootstrap" => false, "routes" => true,"autoload"=>true]);
-
-    ?>
-
 ##General payment flow
 
 Though there are multiple ways to pay an order, most payment gateways expect you to follow the following flow in your checkout process:
@@ -53,7 +44,8 @@ Open your config/path.php file and add your public key, secret key, merchant ema
 Step 1: Include the following code into your AppController.php to load the paystack component
        
        <?php 
-        
+            use jtad009\Controller\Component\PayStack;
+            
             $this->loadComponent('PayStack.PayStack');
             $this->loadComponent('PayStack.CurlConnection');
         ?>
