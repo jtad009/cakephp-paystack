@@ -83,7 +83,7 @@ class PayStackComponent extends Component
 
 		$response = $this->CurlConnection->payStackConnection($options);
     		$tranx = json_decode($response);
-		return $transx;
+		return $tranx;
     
 
     }
