@@ -70,7 +70,7 @@ class PayStackComponent extends Component
      * @param String $reference
      * @return array|false
      */
-    public function callback($reference,$user_id){
+    public function callback($reference){
     	$options = array(
           CURLOPT_URL => $this->verifyUrl . rawurlencode($reference),
           CURLOPT_RETURNTRANSFER => true,
@@ -82,17 +82,9 @@ class PayStackComponent extends Component
         );
 
 		$response = $this->CurlConnection->payStackConnection($options);
-    $tranx = json_decode($response);
-		
-		if(!$tranx->status){
-		  // there was an error from the API
-		  die('API returned error: ' . $tranx->message);
-		}
-
-		if('success' == $tranx->data->status){
-		  // transaction was successful...
-		  return $transx;
-    }
+    		$tranx = json_decode($response);
+		return $transx;
+    
 
     }
     
