@@ -11,6 +11,7 @@ namespace PayStack\Controller\Component;
 
 use Cake\Controller\Component;
 use Cake\Controller\ComponentRegistry;
+use Exception;
 
 /**
  * PayStack component
