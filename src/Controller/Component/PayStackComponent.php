@@ -287,4 +287,28 @@ class PayStackComponent extends Component
     $response = $this->CurlConnection->payStackConnection($options);
     return json_decode($response);
   }
+  public function banks($bank = ''){
+    $options = array(
+      CURLOPT_URL => $this->banks,
+      CURLOPT_HTTPGET => 1,
+      CURLOPT_RETURNTRANSFER => true,
+      CURLOPT_HTTPHEADER => [
+        "accept: application/json",
+        "authorization: Bearer " . (empty($key) ? $this->secretKey : $key),
+        "cache-control: no-cache"
+      ],
+    );
+    $response = $this->CurlConnection->payStackConnection($options);
+    $data = json_decode($response);
+    if($data->status == true):
+      if(strlen($bank) > 1):
+        $filterered = array_filter($data->data, function($bankData) use ($bank) {
+          return false !== stristr(strtolower($bankData->name), strtolower($bank));
+        });
+       return $filterered;
+      endif;
+      return $data->data;
+    endif;
+    throw new Exception($data->message, 1);
+  }
 }
