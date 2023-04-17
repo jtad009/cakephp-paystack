@@ -33,6 +33,7 @@ class PayStackComponent extends Component
     private $customerUrl = "https://api.paystack.co/customer/";
     private $subaccountUrl = "https://api.paystack.co/subaccount/";
     private $transactionUrl = "https://api.paystack.co/transaction/";
+    private $banks ="https://api.paystack.co/bank?country=nigeria";
     
     /* Initiate a payment request to Paystack
      * Included the option to pass the payload to this method for situations 
