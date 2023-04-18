@@ -1,5 +1,5 @@
 <?php
-namespace jtad009\PayStack\Controller\Component;
+namespace PayStack\Controller\Component;
 
 use Cake\Controller\Component;
 use Cake\Controller\ComponentRegistry;

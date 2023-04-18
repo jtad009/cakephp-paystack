@@ -1,6 +1,6 @@
 <?php
 
-namespace jtad009\PayStack\Controller;
+namespace PayStack\Controller;
 
 use App\Controller\AppController as BaseController;
 
