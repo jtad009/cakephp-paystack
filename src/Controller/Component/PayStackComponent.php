@@ -35,7 +35,8 @@ class PayStackComponent extends Component
     private $subaccountUrl = "https://api.paystack.co/subaccount/";
     private $transactionUrl = "https://api.paystack.co/transaction/";
     private $banks ="https://api.paystack.co/bank?country=nigeria";
-    
+    private $verifyAccountNumber ="https://api.paystack.co/bank/resolve?account_number=:accountNumber&bank_code=:bankCode";
+  
     /* Initiate a payment request to Paystack
      * Included the option to pass the payload to this method for situations 
      * when the payload is built on the fly (not passed to the controller from a view)
@@ -312,5 +313,36 @@ class PayStackComponent extends Component
       return $data->data;
     endif;
     throw new Exception($data->message, 1);
+  }
+
+   /**
+   * Verify a customers account number
+   * @param int $accountNumber the account number to verify
+   * @param int $sortCode the banks sort code
+   */
+  public function verifyAccount($accountNumber, $sortCode)
+  {
+    
+    $options = array(
+      CURLOPT_URL => str_replace(
+        [':accountNumber', ':bankCode'],
+      [rawurlencode($accountNumber), rawurlencode($sortCode)],
+      $this->verifyAccountNumber),
+      CURLOPT_HTTPGET => 1,
+      CURLOPT_RETURNTRANSFER => true,
+      CURLOPT_HTTPHEADER => [
+        "accept: application/json",
+        "authorization: Bearer " . ($this->secretKey),
+        "cache-control: no-cache"
+      ],
+    );
+    $response = $this->CurlConnection->payStackConnection($options);
+    $data = json_decode($response);
+   if($data->status === true){
+     return $data->data->account_name;
+   }
+
+    throw new Exception($data->message, 1);
+    
   }
 }
